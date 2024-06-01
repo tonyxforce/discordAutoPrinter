@@ -8,5 +8,3 @@ Please, I implore you, never ever use this bot. It stands as one of the worst id
 # usage
 
 please don't
-
-###### Text goes here
