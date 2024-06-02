@@ -21,9 +21,10 @@ export async function execute(client, commandData) {
 
 	client.log(`${client.user.username} megy!`);
 
+
 	try {
 		await rest.put(Routes.applicationCommands(client.user.id), {
-			body: commandData.slashDatas,
+			body: commandData.datas,
 		});
 	} catch (error) {
 		console.error(error);

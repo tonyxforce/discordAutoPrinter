@@ -19,15 +19,14 @@ import { readdirSync } from 'node:fs';
 
 import { Data } from "./Data"
 
-var data: Data;
 
 import { execute } from "./src/utils/commandHandler"
 
-execute(client).then((theData) => {
+execute(client).then((theData: Data) => {
 	readdirSync('./src/utils').map(async file => {
 		if (file.includes("commandHandler")) return;
 
-		const util = require(`./src/utils/${file}`);
+		const util = await import(`./src/utils/${file}`);
 		util.execute(client, theData);
 	});
 });

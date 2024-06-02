@@ -11,9 +11,8 @@ export async function execute(interaction, commandData) {
 		}
 
 		try {
-			const command = commandData.slashCommands.get(interaction.commandName);
-
-			command.slashRun(client, interaction);
+			const command = commandData.commands.get(interaction.commandName);
+			command.exec(client, interaction);
 
 		} catch (e) {
 			console.error(e);

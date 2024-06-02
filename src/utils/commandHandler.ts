@@ -7,33 +7,27 @@ import { Data as CommandData } from "../../Data";
 export async function execute(client) {
 	var data: CommandData = {
 		commands: new Collection(),
-		commandAliases: new Collection(),
-		slashCommands: new Collection(),
-		slashDatas: [],
+		datas: [],
 	}
 
 	// - Handlers -
 	const commandFolders = await readdirSync('./src/commands');
 
-	await Promise.all(commandFolders.map(async category => {
+	commandFolders.forEach(async (category: string) => {
 		const commandFiles = await readdirSync(`./src/commands/${category}`);
 
 
-		await Promise.all(commandFiles.map(async file => {
+		commandFiles.forEach(async (file: string) => {
 
-			const commands = await import(`../commands/${category}/${file}`);
+			const command = await import(`../commands/${category}/${file}`);
 
-			console.log(commands)
-			if (commands) {
+			if (command) {
 
-				if (!commands.slashData) return;
-				// Slash Command
-				const slashCommand = commands;
-				data.slashDatas.push(slashCommand.slashData.toJSON());
-				data.slashCommands.set(slashCommand.slashData.name, slashCommand);
-
+				if (!command.data) return;
+				data.datas.push(command.data.toJSON());
+				data.commands.set(command.data.name, command);
 			}
-		}));
-	}));
+		});
+	});
 	return data;
 };
