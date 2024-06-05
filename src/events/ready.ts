@@ -7,7 +7,7 @@ export var once = true
 
 export async function execute(client, commandData) {
 	const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN || "a");
-	const activities = ['Developed by tonyxforce.', `${client.user.username}`];
+	const activities = ['Developed by tonyxforce.', `${client.user.username}`, "Slicer bot"];
 	let nowActivity = 0;
 
 	const botPresence = () => {
@@ -19,7 +19,7 @@ export async function execute(client, commandData) {
 
 	botPresence();
 
-	client.log(`${client.user.username} megy!`);
+	client.log(`${client.user.username} running!`);
 
 
 	try {
